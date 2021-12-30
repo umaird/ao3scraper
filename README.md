@@ -1,6 +1,6 @@
 # ao3scraper
 
-[![GitHub license](https://img.shields.io/github/license/displayportdog/ao3scraper?style=for-the-badge)](https://github.com/displayportdog/ao3scraper/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/displayportdog/ao3scraper?style=for-the-badge)](https://github.com/displayportdog/ao3scraper/blob/main/LICENSE) [![GitHub issues](https://img.shields.io/github/issues/displayportdog/ao3scraper?style=for-the-badge)](https://github.com/displayportdog/ao3scraper/issues)
 
 Simple node.js package for grabbing data from The Archive Of Our Own (AO3) 
 
