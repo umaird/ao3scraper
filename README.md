@@ -8,7 +8,7 @@ Simple node.js package for grabbing data from The Archive Of Our Own (AO3)
 
 ## Installation
 ```
-npm i @dpdog/ao3scraper
+npm i ao3scraper
 ```
 
 ## Usage
@@ -16,12 +16,12 @@ npm i @dpdog/ao3scraper
 Standard usage is as a promise, as seen below.
 
 ```js
-const ao3scraper = require('@dpdog/ao3scraper')
+const ao3scraper = require('ao3scraper')
 //replace with your fic, this is just for demo
 const pageURL = "https://archiveofourown.org/works/35864404"
 
-ao3scraper(pageURL).then(function(ficInfo){
-   //do something with results
+ao3scraper(pageURL).then(ficInfo => {
+    //do something with results
 }).catch(err => {
     // This code block will also execute if the link is a 404
     console.error(err)
