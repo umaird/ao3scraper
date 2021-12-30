@@ -2,27 +2,7 @@ module.exports = async function getTitle(pageURL, verbose = false) {
     const axios = require("axios");
     const cheerio = require("cheerio");
     let ficInfo = {
-        title: undefined,
-        authors: undefined,
-        summary: undefined,
-        tags: undefined,
-        chapters: undefined,
-        published: undefined,
-        updated: undefined,
-        wordCount: undefined,
-        commentCount: undefined,
-        kudosCount: undefined,
-        bookmarkCount: undefined,
-        hitCount: undefined,
-        rating: undefined,
-        pairings: undefined,
-        category: undefined,
-        language: undefined,
-        warnings: undefined,
-        authorPages: undefined,
-        fandoms: undefined,
-        collections: undefined,
-        sfw: true,
+        sfw: true
     }
 
     if (verbose === true){console.log(`Loading webpage [${pageURL}]`)}
@@ -39,10 +19,10 @@ module.exports = async function getTitle(pageURL, verbose = false) {
 
         let holdTemp = [];
 
-            if (getElementsBy($, 'div[id="main"]', 'p[class="caution"]', verbose).toString().includes('adult')){
-                ficInfo.sfw	= false;
-                if (verbose === true){ console.log(`Fic is NSFW - limited data available`) }
-            }
+        if (getElementsBy($, 'div[id="main"]', 'p[class="caution"]', verbose).toString().includes('adult')){
+            ficInfo.sfw	= false;
+            if (verbose === true){ console.log(`Fic is NSFW - limited data available`) }
+        }
 
         ficInfo.authors = getElementsBy($, 'div[class="preface group"]', 'h3[class="byline heading"] > a[rel="author"]', verbose);
         ficInfo.title = getElementsBy($, 'div[class="preface group"]', 'h2[class="title heading"]', verbose);
