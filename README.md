@@ -13,7 +13,7 @@ npm i ao3scraper
 
 ## Usage
 
-Standard usage is as a promise, as seen below.
+Standard usage is as a promise, as seen below:
 
 ```js
 const ao3scraper = require('ao3scraper')
@@ -28,10 +28,11 @@ ao3scraper(pageURL).then(ficInfo => {
 });
 ```
 
-This will return an object like below
+This will return an object:
 
 ```js
 {
+  sfw: true, //if the fic is safe for work as bool
   title: 'Cookies and Deceit', //work title as string
   authors: [ 'dpdog' ], //authors as array of strings (even if only one)
   summary: 'They’d messed up, but they’d make it right.', //summary as string
@@ -59,12 +60,11 @@ This will return an object like below
   warnings: [ 'No Archive Warnings Apply' ], //warnings as array of strings
   authorPages: [ '/users/dpdog/pseuds/dpdog' ], //links to authors userpages as array of strings
   fandoms: [ 'Miraculous Ladybug' ], //fandoms as array of strings
-  collections: [ 'Challenge of the Day' ], //collections as array of strings
-  sfw: true //if the fic is safe for work as bool
+  collections: [ 'Challenge of the Day' ] //collections as array of strings
 }
 ```
 
-Note that for E fics, a lot of this data will __not__ be returned.
+This data will be returned **regardless** of the fic rating.
 
 
 

@@ -5,6 +5,8 @@ module.exports = async function getTitle(pageURL, verbose = false) {
         sfw: true
     }
 
+    pageURL += `?view_adult=true`
+
     if (verbose === true){console.log(`Loading webpage [${pageURL}]`)}
     if (pageURL.toLowerCase().includes(`https://archiveofourown.org/works/`) || (pageURL.toLowerCase().includes(`archiveofourown.org/collections/`) && pageURL.toLowerCase().includes(`/works/`))){
 
@@ -19,9 +21,9 @@ module.exports = async function getTitle(pageURL, verbose = false) {
 
         let holdTemp = [];
 
-        if (getElementsBy($, 'div[id="main"]', 'p[class="caution"]', verbose).toString().includes('adult')){
+        if (getElementsBy($, 'dd[class="rating tags"]', 'a[class="tag"]', verbose).toString().includes('xplicit')){
             ficInfo.sfw	= false;
-            if (verbose === true){ console.log(`Fic is NSFW - limited data available`) }
+            if (verbose === true){ console.log(`Fic is NSFW`) }
         }
 
         ficInfo.authors = getElementsBy($, 'div[class="preface group"]', 'h3[class="byline heading"] > a[rel="author"]', verbose);
@@ -67,38 +69,6 @@ module.exports = async function getTitle(pageURL, verbose = false) {
         ficInfo.warnings = getElementsBy($, 'dd[class="warning tags"]', 'ul > li > a', verbose);
         ficInfo.fandoms = getElementsBy($, 'dd[class="fandom tags"]', 'ul > li > a', verbose);
         ficInfo.collections = getElementsBy($, 'dd[class="collections"]', 'a', verbose);
-
-        if (ficInfo.sfw === false)
-        {
-
-            ficInfo.title = getElementsBy($, 'h4[class="heading"]', 'a:not(a[rel="author"])', verbose)[0];
-            ficInfo.author = getElementsBy($, 'h4[class="heading"]', 'a[rel="author"]', verbose);
-            ficInfo.fandoms = getElementsBy($, 'h5[class="fandoms heading"]', 'a[class="tag"]', verbose);
-
-            //AUTHORPAGES
-
-            $('h4[class="heading"]')
-                .find('a[rel="author"]').each(
-                function(  ) {
-                    holdTemp.push($(this).attr('href'));
-                }
-
-            )
-
-            holdTemp = holdTemp.map(element => {
-                return element.trim();
-            });
-
-            ficInfo.authorPages = holdTemp;
-            if (verbose === true){ console.log(holdTemp) }
-            holdTemp = [];
-
-            //DO NOT MESS WITH THIS
-
-            ficInfo.summary = "[Summaries for explicit works are hidden.]"
-
-
-        }
 
 
 
