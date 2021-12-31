@@ -30,7 +30,7 @@ module.exports = async function getTitle(pageURL, verbose = false) {
         ficInfo.title = getElementsBy($, 'div[class="preface group"]', 'h2[class="title heading"]', verbose);
         ficInfo.category = getElementsBy($, 'dd[class="category tags"]', 'ul[class="commas"] > li > a[class="tag"]', verbose);
         ficInfo.tags = getElementsBy($, 'dd[class="freeform tags"]', 'ul[class="commas"] > li > a[class="tag"]', verbose);
-        ficInfo.summary = getElementsBy($, 'div[class="summary module"]', 'blockquote[class="userstuff"] > p', verbose)[0];
+        ficInfo.summary = getElementsBy($, 'div[class="summary module"]', 'blockquote[class="userstuff"] > p', verbose).join('\n \n');
         ficInfo.rating = getElementsBy($, 'dd[class="rating tags"]', 'ul[class="commas"] > li > a[class="tag"]', verbose)[0];
 
         //AUTHORPAGES
@@ -86,7 +86,7 @@ function getElementsBy($, parent, element, verbose){
     $(parent)
         .find(element).each(
         function(  ) {
-            holdTemp.push($( this ).toArray().map(el => $(el).text())[0]);
+            holdTemp.push($( this ).html($(this).html().replace(/<br\s*[\/]?>/gi, "\n")).toArray().map(el => $(el).text())[0]);
 
         }
 
