@@ -18,9 +18,6 @@ async function getTitle(pageURL, verbose = false) {
 
         let $ = cheerio.load(res.data);
 
-
-        let holdTemp = [];
-
         if (getElementsBy($, 'dd[class="rating tags"]', 'a[class="tag"]', verbose).toString().includes('xplicit')){
             ficInfo.sfw	= false;
             if (verbose === true){ console.log(`Fic is NSFW`) }
@@ -68,7 +65,7 @@ async function getTitle(pageURL, verbose = false) {
 
     if (verbose === true){ console.log(ficInfo) }
     return ficInfo;
-};
+}
 
 function getElementsBy($, parent, element, verbose){
     let holdTemp = [];

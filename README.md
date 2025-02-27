@@ -45,7 +45,7 @@ getFicInfo()
 This will return an object:
 
 ```js
-{
+const res = {
   sfw: true, //if the fic is safe for work as bool
   title: 'Cookies and Deceit', //work title as string
   authors: [ 'dpdog' ], //authors as array of strings (even if only one)
