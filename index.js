@@ -58,10 +58,10 @@ module.exports = async function getTitle(pageURL, verbose = false) {
 
         ficInfo.chapters = getElementsBy($, 'dl[class="stats"]', 'dd[class="chapters"]', verbose)[0];
         ficInfo.published = getElementsBy($, 'dl[class="stats"]', 'dd[class="published"]', verbose)[0];
-        ficInfo.wordCount = parseInt(getElementsBy($, 'dl[class="stats"]', 'dd[class="words"]', verbose)[0]);
-        ficInfo.commentCount = parseInt(getElementsBy($, 'dl[class="stats"]', 'dd[class="comments"]', verbose)[0]);
-        ficInfo.kudosCount = parseInt(getElementsBy($, 'dl[class="stats"]', 'dd[class="kudos"]', verbose)[0]);
-        ficInfo.bookmarkCount = parseInt(getElementsBy($, 'dl[class="stats"]', 'dd[class="bookmarks"]', verbose)[0]);
+        ficInfo.wordCount = parseInt(cleanNumber(getElementsBy($, 'dl[class="stats"]', 'dd[class="words"]', verbose)[0]));
+        ficInfo.commentCount = parseInt(cleanNumber(getElementsBy($, 'dl[class="stats"]', 'dd[class="comments"]', verbose)[0]));
+        ficInfo.kudosCount = parseInt(cleanNumber(getElementsBy($, 'dl[class="stats"]', 'dd[class="kudos"]', verbose)[0]));
+        ficInfo.bookmarkCount = parseInt(cleanNumber(getElementsBy($, 'dl[class="stats"]', 'dd[class="bookmarks"]', verbose)[0]));
         ficInfo.updated = getElementsBy($, 'dl[class="stats"]', 'dd[class="status"]', verbose)[0];
         ficInfo.hitCount = parseInt(getElementsBy($, 'dl[class="stats"]', 'dd[class="hits"]', verbose)[0]);
         ficInfo.language = getElementsBy($, 'dl[class="work meta group"]', 'dd[class="language"]', verbose)[0];
@@ -99,3 +99,14 @@ function getElementsBy($, parent, element, verbose){
     if (verbose === true){ console.log(holdTemp) }
     return holdTemp;
 }
+
+function cleanNumber(numString){
+    return numString.replaceAll(/\D/g, '');
+}
+
+module.exports = {
+    getTitle
+}
+
+
+
