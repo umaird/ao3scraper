@@ -15,6 +15,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/displayportdog/ao3scraper"
+    "url": "git+https://github.com/umaird/ao3scraper.git"
   }
 }
