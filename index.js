@@ -1,4 +1,4 @@
-module.exports = async function getTitle(pageURL, verbose = false) {
+async function getTitle(pageURL, verbose = false) {
     const axios = require("axios");
     const cheerio = require("cheerio");
     let ficInfo = {
@@ -34,27 +34,17 @@ module.exports = async function getTitle(pageURL, verbose = false) {
         ficInfo.rating = getElementsBy($, 'dd[class="rating tags"]', 'ul[class="commas"] > li > a[class="tag"]', verbose)[0];
 
         //AUTHORPAGES
-        holdTemp = [];
+        ficInfo.authorPages = [];
 
         $('div[class="preface group"]')
             .find('h3[class="byline heading"] > a[rel="author"]').each(
             function(  ) {
-                holdTemp.push($(this).attr('href'));
+                ficInfo.authorPages.push($(this).attr('href').trim());
 
 
             }
 
         )
-
-        holdTemp = holdTemp.map(element => {
-            return element.trim();
-        });
-
-        if (verbose === true){ console.log(holdTemp) }
-        ficInfo.authorPages = holdTemp;
-        holdTemp = [];
-
-        //DONT MESS WITH THIS [YET ;)]
 
         ficInfo.chapters = getElementsBy($, 'dl[class="stats"]', 'dd[class="chapters"]', verbose)[0];
         ficInfo.published = getElementsBy($, 'dl[class="stats"]', 'dd[class="published"]', verbose)[0];
@@ -73,7 +63,7 @@ module.exports = async function getTitle(pageURL, verbose = false) {
 
 
     }).catch(err => {
-        if (verbose === false){ throw `An error occured while trying to access that page`; } else { throw err; }
+        throw err;
     })
 
     if (verbose === true){ console.log(ficInfo) }
