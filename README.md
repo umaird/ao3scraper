@@ -13,19 +13,33 @@ npm i ao3scraper
 
 ## Usage
 
-Standard usage is as a promise, as seen below:
-
 ```js
-const ao3scraper = require('ao3scraper')
-//replace with your fic, this is just for demo
-const pageURL = "https://archiveofourown.org/works/35864404"
+const { getTitle } = require('ao3scraper');
+const pageURL = "https://archiveofourown.org/works/workid" // your work here
 
-ao3scraper(pageURL).then(ficInfo => {
-    //do something with results
+getTitle(pageURL).then(ficInfo => { 
+    //do something...
 }).catch(err => {
-    // This code block will also execute if the link is a 404
+    // Handle errors (incl. 404)
     console.error(err)
 });
+```
+
+```js
+const { getTitle } = require('ao3scraper');
+const pageURL = "https://archiveofourown.org/works/workid" // your work here
+
+async function getFicInfo() {
+    try {
+        const ficInfo = await getTitle(pageURL)
+        //do something...
+    } catch (err) {
+        // Handle errors (incl. 404)
+        console.error(err)
+    }
+}
+
+getFicInfo()
 ```
 
 This will return an object:
